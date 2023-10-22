@@ -21,7 +21,7 @@ function Thumbnail({ movie }: Props) {
       }}
     >
       <Image
-        src={movie.large_cover_image ?? movie.medium_cover_image ?? movie.background_image_original || "chrome://favicon2/?size=24&scaleFactor=1x&showFallbackMonogram=&pageUrl=https%3A%2F%2Fwww.awardspace.com%2F"}
+        src={movie.large_cover_image ?? movie.medium_cover_image ?? movie.background_image_original ?? "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png"}
         className="rounded-sm object-cover md:rounded"
         layout="fill"
         alt=""
