@@ -30,7 +30,7 @@ function Login() {
   return (
     <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
       <Head>
-        <title>Netflix</title>
+        <title>{process.env.NEXT_PUBLIC_SITE_NAME}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Image
@@ -42,7 +42,7 @@ function Login() {
       />
 
       <img
-        src="/netflix_logo.svg"
+        src="/movies-logo.png"
         className="absolute left-4 top-4 cursor-pointer object-contain md:left-10 md:top-6"
         width={150}
         height={150}
@@ -91,7 +91,7 @@ function Login() {
         </button>
 
         <div className="text-[gray]">
-          New to Netflix?{' '}
+          New to {process.env.NEXT_PUBLIC_SITE_NAME}?{' '}
           <button
             type="submit"
             className="text-white hover:underline"
