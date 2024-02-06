@@ -5,24 +5,34 @@ import {useRecoilState} from 'recoil'
 import {modalState, movieState} from '../atoms/modalAtom'
 import {Genre} from '../typings'
 import {useMediaQuery} from "@mui/material";
+import useAuth from '../hooks/useAuth'
+import { useRouter } from 'next/router'
+import useIFrameFocus from 'hooks/useIFrameFocus'
 
 function Modal() {
     const [showModal, setShowModal] = useRecoilState(modalState)
     const [movie, setMovie] = useRecoilState(movieState)
+    const {user} = useAuth();
     if (!movie) return null;
     const [trailer, setTrailer] = useState('')
     const [genres, setGenres] = useState<Genre[]>([])
     const [muted, setMuted] = useState(true)
     const [hidden, setHidden] = useState(false)
     const player = useRef(null)
+    const router = useRouter();
     const matches = useMediaQuery('(min-width:600px)')
     const handleClose = () => {
         setShowModal(false)
     }
     useEffect(() => {
         if (!hidden) setTimeout(() => setHidden(true), 100);
-    }, [hidden])
-    console.log(trailer)
+        // if (!user) router.push('/login')
+    }, [hidden]);
+    useIFrameFocus({id: "main-viewer-iframe"}, () => {
+        console.log('iframe focued')
+        if (!user) router.push('/login')
+    }, () => console.log("iframe blurred"));
+    console.log(trailer);
     return (
         <MuiModal
             open={showModal}
@@ -37,11 +47,11 @@ function Modal() {
                     <XMarkIcon className="h-6 w-6"/>
                 </button>
 
-                <div className="relative pt-[56.25%]">
-                    <iframe onClick={() => {
-                        console.log('hidden false')
+                <div className="relative pt-[56.25%]" onClick={() => {
+                        console.log('hidden false');
                         setHidden(false)
-                    }} allowTransparency allowFullScreen
+                    }}>
+                    <iframe id="main-viewer-iframe" allowTransparency allowFullScreen
                             src={`https://docs.cloud.kabeers.network/static/movies/player.php?hash=${movie?.torrents?.at(-1)?.hash}&title=${movie?.title}&poster=${movie.background_image}`}
                             style={{
                                 width: "100%",

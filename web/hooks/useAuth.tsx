@@ -21,9 +21,9 @@ interface IAuth {
 
 const AuthContext = createContext<IAuth>({
   user: null,
-  signUp: async () => {},
-  signIn: async () => {},
-  logout: async () => {},
+  signUp: async () => { },
+  signIn: async () => { },
+  logout: async () => { },
   error: null,
   loading: false,
 })
@@ -40,24 +40,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter()
 
   // Persisting the user
-  useEffect(
-    () =>
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // Logged in...
-          setUser(user)
-          setLoading(false)
-        } else {
-          // Not logged in...
-          setUser(null)
-          setLoading(true)
-          router.push('/login')
-        }
+  useEffect(() =>
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Logged in...
+        setUser(user)
+        setLoading(false)
+      } else {
+        // Not logged in...
+        setUser(null)
+        setLoading(false)
+        // router.push('/login')
+      }
 
-        setInitialLoading(false)
-      }),
-    [auth]
-  )
+      setInitialLoading(false);
+    }), []);
 
   const signUp = async (email: string, password: string) => {
     setLoading(true)
@@ -110,7 +107,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider value={memoedValue}>
-      {!initialLoading && children}
+      {}
+      {!initialLoading ? children : <></>}
     </AuthContext.Provider>
   )
 }
