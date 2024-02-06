@@ -5,6 +5,7 @@ module.exports = {
     ignoreBuildErrors: true
   },
   images: {
+    unoptimized: true,
     domains: ['image.tmdb.org', 'yts.mx', 'rb.gy'],
   },
 }

@@ -26,13 +26,11 @@ export default function useIFrameFocus({ id }: { id: string }, onFocus: () => an
       window.removeEventListener('focus', windowFocussed, true);
       window.removeEventListener('blur', windowBlurred, true);
     };
-  }, []); // Empty dependency array ensures that the effect runs once when the component mounts
+  }, []);
 
-  // If you want to expose destroy function
-  // function destroy() {
-  //   window.removeEventListener('focus', windowFocussed, true);
-  //   window.removeEventListener('blur', windowBlurred, true);
-  // }
-
-  // return { destroy };
+  function destroy() {
+    window.removeEventListener('focus', windowFocussed, true);
+    window.removeEventListener('blur', windowBlurred, true);
+  }
+  return destroy;
 }

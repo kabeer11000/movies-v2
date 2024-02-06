@@ -107,8 +107,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider value={memoedValue}>
-      {}
-      {!initialLoading ? children : <></>}
+      <div className="">{children}</div>
     </AuthContext.Provider>
   )
 }
