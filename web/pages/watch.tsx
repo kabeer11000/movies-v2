@@ -15,9 +15,12 @@ import { useEffect } from 'react'
 
 
 const Watch = ({movie}) => {
+    const { loading } = useAuth();
     const [, setShowModal] = useRecoilState(modalState)
     const [, setCurrentMovie] = useRecoilState(movieState);
     const router = useRouter();
+
+    if (loading) return null;
     useEffect(() => {
         if (movie) {
             setCurrentMovie(movie)
@@ -25,7 +28,7 @@ const Watch = ({movie}) => {
             router.push('/');
         }
         else router.push('/');
-    }, [router.isReady])
+    }, [router.isReady]);
 
     return (
         <div
