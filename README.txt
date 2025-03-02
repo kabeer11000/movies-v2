@@ -34,7 +34,7 @@ To run the project locally, follow these steps:
 
 1. Clone the Repository:
 git clone https://github.com/kabeer11000/movies-v2
-cd movies-v2
+cd movies-v2/web
 
 2. Install Dependencies:
 npm install
